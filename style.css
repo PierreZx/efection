@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #222;
+    transform-style: preserve-3d;
+}
+
+.box
+{
+    position: relative;
+    display: flex;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+
+.box .item:hover
+{
+    transform: scale(1.25);
+}
+
+.box .item {
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 300px;
+    transition: 0.5s opacity ease-in-out, transform 0.5s ease; /* Transição para opacidade e transformação */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    user-select: none;
+    overflow: hidden; /* Garante que a imagem fique dentro do contêiner */
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0002);
+    opacity: 0; /* Inicialmente invisível */
+}
+
+.box .item.visible {
+    opacity: 1; /* Torna a imagem visível quando a classe 'visible' é adicionada */
+    transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); /* Reseta a transformação para que as imagens apareçam corretamente */
+    transition: opacity 1s ease, transform 1s ease; /* Transição suave para opacidade e transformação */
+}
+
+.box .item:nth-child(1) {
+    transform: translate3d(-250px, 0, 0) scale(0.8) rotateY(25deg);
+    z-index: 1;
+}
+
+.box .item:nth-child(2) {
+    transform: translate3d(-250px, 0, 0) scale(0.8) rotateY(25deg);
+    z-index: 2;
+}
+
+.box .item:nth-child(3) {
+    transform: translate3d(-150px, 0, 0) scale(0.9) rotateY(15deg);
+    z-index: 3;
+}
+
+.box .item:nth-child(4) {
+    transform: translate3d(0px, 0, 0) scale(1) rotateY(0deg);
+    z-index: 4;
+}
+
+
+.box .item:nth-child(5) {
+    transform: translate3d(150px, 0, 0) scale(0.9) rotateY(-15deg);
+    z-index: 3;
+}
+
+.box .item:nth-child(6) {
+    transform: translate3d(250px, 0, 0) scale(0.8) rotateY(-25deg);
+    z-index: 2;
+}
+
+.box .item:nth-child(7) {
+    transform: translate3d(250px, 0, 0) scale(0.8) rotateY(-25deg);
+    z-index: -1;
+}
+
+.box .item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.buttons {
+    position: absolute;
+    bottom: 75px;
+    display: flex;
+    gap: 20px;
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.5s ease-in-out; /* Transição suave para aparecer */
+}
+
+.buttons.visible {
+    opacity: 1; /* Torna a div visível quando a classe 'visible' é adicionada */
+}
+
+.prev, .next {
+    display: inline-block; /* Ou outro valor, dependendo do seu layout */
+}
+
+.buttons span {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.buttons span:hover {
+    opacity: 1;
+    transition: all 0.3s ease-in-out; /* Mais controle na transição do hover */
+}
+
+.buttons span::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(-45deg);
+}
+
+.buttons span:last-child::before {
+    content: '';
+    position: absolute;
+    left: initial;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(135deg);
+}
+
+.menu {
+    position: fixed; /* Fixa o menu na tela */
+    top: 0; /* Coloca o menu no topo da tela */
+    left: 0; /* Coloca o menu na parede lateral esquerda */
+    background-color: #2E2E2E;
+    width: 300px; /* Largura do menu */
+    height: 960px; /* Altura do menu */
+    z-index: 1000; /* Garante que o menu ficará acima de outros elementos */
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.menu h2{
+    margin-top: 7px;
+    color: #fff;
+    font-family: "Parkinsans";
+    font-size: 30px;
+    margin-left: 7px;
+}
+
+.menu p{
+    margin-top: 7px;
+    color: #b6b6b6;
+    font-family: "Parkinsans";
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.menu button {
+    margin: 7px 7px; /* Margem ao redor do botão */
+    color: #b6b6b6; /* Cor do texto */
+    font-family: "Parkinsans";
+    font-size: 30px; /* Ajuste do tamanho da fonte */
+    padding: 5px 10px; /* Espaçamento interno do botão */
+    background-color: transparent; /* Fundo transparente */
+    border: none; /* Remove bordas padrões */
+    cursor: pointer; /* Mostra o cursor de clique */
+    transition: color 0.3s ease; /* Transição suave para a mudança de cor */
+}
+
+.menu button:hover {
+    color: brown; /* Cor ao passar o mouse */
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Esconde o menu fora da tela */
+    background-color: #2E2E2E;
+    width: 300px;
+    height: 100%; /* Altura total da tela */
+    z-index: 1000;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: left 0.3s ease; /* Transição suave para abrir/fechar */
+}
+
+.menu.open {
+    left: 0; /* Mostra o menu na tela */
+}
+
+.icone button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: #969696;
+    transition: color 0.3s ease;
+}
+
+.icone button:hover {
+
+    color: #dddddd;
+}
+
+.icone2 {
+    position: fixed; /* Fixa o elemento na janela */
+    top: 0; /* Alinha no topo */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    padding: 10px; /* Espaçamento interno */
+    margin-top: 10px;
+    font-size: 30px;
+    transition: color 0.3s ease;
+    transition: font-size 0.3s ease;
+}
+
+.icone2:hover {
+    color: #fff;
+    font-size: 35px;
+}
